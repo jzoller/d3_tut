@@ -22,12 +22,14 @@
                 d3.rgb("#C0FF3E"), //olivedrab 1
                 d3.rgb(0, 191, 255), //deepskyblue1
                 d3.rgb("#9400D3"), //darkviolet
-                d3.rgb("#D3D3D3") //ligntgrey
+                d3.rgb("#D3D3D3") //lightgrey
                 ];
-            var dataset = [5, 10, 15, 20, 25];
+            var dataset = [5, 10, 13, 19, 21, 25, 22, 15, 13,
+             11, 12, 15, 18, 17, 16, 18, 23, 25];
 
             var w = 500;
-            var h = 50;
+            var h = 100;
+            var barPadding = 1;
             var randomColor = function() {
                 var index = Math.floor(Math.random() * color.length);
                 console.log(index);
@@ -37,23 +39,23 @@
                 .append("svg")
                 .attr("width", w)
                 .attr("height", h);
-            var circles = svg.selectAll("circle")
+            svg.selectAll("rect")
                 .data(dataset)
                 .enter()
-                .append("circle");
-            circles.attr("cx", function(d, i) {
-                    return (i * 50) + 25;
+                .append("rect")
+                .attr("x", function(d, i) {
+                    return i * (w / dataset.length);
                 })
-                .attr("cy", h / 2)
-                .attr("r", function(d) {
-                    return d;
+                .attr("y", function(d) {
+                    return h - d * 4;
                 })
-                // .attr("fill", "yellow")
-                // .attr("stroke", "orange")
-                .attr("fill", randomColor)
-                .attr("stroke", randomColor)
-                .attr("stroke-width", function(d) {
-                    return d / 2;
+                .attr("width", w / dataset.length - 1)
+                .attr("height", function(d) {
+                    return d * 4;
+                })
+                .attr("fill", function(d) {
+                    // return "rgb(0, 0, " + (d * 10) + ")";
+                    return "rgb(0, " + (d * 10).toString() + ", 0)";
                 });
         </script>
     </body>
