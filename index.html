@@ -9,9 +9,30 @@
     <body>
         <br>
         <script type="text/javascript">
+            var color = ["green", 
+                "orange", 
+                "red", 
+                "yellow", 
+                "blue", 
+                "pink", 
+                d3.rgb("#ffffff"),
+                d3.rgb(189, 252, 128), //mint
+                d3.rgb("#FDF5E6"), //old lace
+                d3.rgb("#B22222"), //firebrick
+                d3.rgb("#C0FF3E"), //olivedrab 1
+                d3.rgb(0, 191, 255), //deepskyblue1
+                d3.rgb("#9400D3"), //darkviolet
+                d3.rgb("#D3D3D3") //ligntgrey
+                ];
             var dataset = [5, 10, 15, 20, 25];
+
             var w = 500;
             var h = 50;
+            var randomColor = function() {
+                var index = Math.floor(Math.random() * color.length);
+                console.log(index);
+                return color[index];
+            }
             var svg = d3.select("body")
                 .append("svg")
                 .attr("width", w)
@@ -21,12 +42,19 @@
                 .enter()
                 .append("circle");
             circles.attr("cx", function(d, i) {
-                return (i * 50) + 25;
-            })
-            .attr("cy", h/2)
-            .attr("r", function(d) {
-                return d;
-            });
+                    return (i * 50) + 25;
+                })
+                .attr("cy", h / 2)
+                .attr("r", function(d) {
+                    return d;
+                })
+                // .attr("fill", "yellow")
+                // .attr("stroke", "orange")
+                .attr("fill", randomColor)
+                .attr("stroke", randomColor)
+                .attr("stroke-width", function(d) {
+                    return d / 2;
+                });
         </script>
     </body>
 </html>     
